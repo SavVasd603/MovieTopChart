@@ -1,7 +1,5 @@
-package com.example.movietopchart
+package com.example.movietopchart.Adapters
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,24 +7,28 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.movietopchart.Model.Movie
-import com.example.movietopchart.Model.Result
-import com.example.movietopchart.ui.MovieActivity
+import com.example.movietopchart.Model.Movie.Result
+import com.example.movietopchart.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(val movie: MutableList<Result>?):
+class MovieAdapter(val movie: MutableList<Result>?, val mItemClickListener: ItemClickListener):
     RecyclerView.Adapter<MovieAdapter.MyViewHolder>() {
 
-        class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            val image: ImageView = itemView.image_movie
-            /*val txt_name: TextView = itemView.txt_name
-            val txt_createdby: TextView = itemView.txt_createdby
-            val card_view: CardView = itemView.cardView*/
-            val txt_rating: TextView = itemView.tvRating
+    interface ItemClickListener{
+        fun onItemClick(id: Int)
+    }
 
+        inner class MyViewHolder(ItemView: View): RecyclerView.ViewHolder(ItemView){
+            val image: ImageView = ItemView.image_movie
+            val txt_rating: TextView = ItemView.tvRating
+            val cardView: CardView = ItemView.cardView
 
+            init {
+                cardView.setOnClickListener {
+                    movie?.get(position)?.id?.let { it -> mItemClickListener.onItemClick(it) }
+                }
+            }
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -43,4 +45,5 @@ class MovieAdapter(val movie: MutableList<Result>?):
     override fun getItemCount(): Int {
         return movie!!.size
     }
+
 }

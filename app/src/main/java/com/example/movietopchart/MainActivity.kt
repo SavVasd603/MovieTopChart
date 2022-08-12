@@ -3,9 +3,9 @@ package com.example.movietopchart
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.movietopchart.ui.Cinema
-import com.example.movietopchart.ui.Home
-import com.example.movietopchart.ui.Movies
+import com.example.movietopchart.ui.mainUI.Cinema
+import com.example.movietopchart.ui.mainUI.Home
+import com.example.movietopchart.ui.mainUI.Movies
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

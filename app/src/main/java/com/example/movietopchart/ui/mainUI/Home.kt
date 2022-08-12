@@ -1,18 +1,20 @@
-package com.example.movietopchart.ui
+package com.example.movietopchart.ui.mainUI
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietopchart.Api.ApiInterface
-import com.example.movietopchart.Model.Movie
-import com.example.movietopchart.Model.Result
-import com.example.movietopchart.MovieAdapter
+import com.example.movietopchart.Model.Movie.Movie
+import com.example.movietopchart.Model.Movie.Result
+import com.example.movietopchart.Adapters.MovieAdapter
 import com.example.movietopchart.R
+import com.example.movietopchart.ui.additionUI.MovieDetail
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,15 +40,21 @@ class Home : Fragment() {
 
         val apiInterface = ApiInterface.create().getMovies("bcc06d4f45d203738f635121cea37f4d")
 
-        apiInterface.enqueue(object : Callback<Movie>{
+        apiInterface.enqueue(object : Callback<Movie>, MovieAdapter.ItemClickListener{
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                adapter = MovieAdapter(response?.body()?.results as MutableList<Result>?)
+                adapter = MovieAdapter(response?.body()?.results as MutableList<Result>?, this)
                 rcView.adapter = adapter
 
             }
             override fun onFailure(call: Call<Movie>, t: Throwable) {
-               /* Toast.makeText(context, "Something goes wrong", Toast.LENGTH_LONG).show()*/
+               Toast.makeText(context, "Something goes wrong,error ${t?.message}", Toast.LENGTH_LONG).show()
                 Log.d("testlog","Failed : ${t?.message}")
+            }
+
+            override fun onItemClick(id: Int) {
+                val intent = Intent(context, MovieDetail::class.java)
+                intent.putExtra("id", id)
+                startActivity(intent)
             }
         })
     }

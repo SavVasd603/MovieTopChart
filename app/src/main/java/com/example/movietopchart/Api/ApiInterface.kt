@@ -1,10 +1,12 @@
 package com.example.movietopchart.Api
 
-import com.example.movietopchart.Model.Movie
+import com.example.movietopchart.Model.Movie.Movie
+import com.example.movietopchart.Model.MovieDetails.MovieDetails
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -12,7 +14,7 @@ interface ApiInterface {
     fun getMovies(@Query ("api_key") sort : String): Call<Movie>
 
     @GET("movie/{movie_id}")
-    fun getMovieById(@Query ("api_key") sort: String):Call<Movie>
+    fun getMovieById(@Path("movie_id") movieId: Int, @Query ("api_key") sort: String) : Call<MovieDetails>
 
     companion object{
 

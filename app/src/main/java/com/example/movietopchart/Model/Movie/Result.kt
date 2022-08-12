@@ -1,4 +1,4 @@
-package com.example.movietopchart.Model
+package com.example.movietopchart.Model.Movie
 
 data class Result(
     val adult: Boolean,
