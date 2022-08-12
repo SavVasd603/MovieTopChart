@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietopchart.Api.ApiInterface
 import com.example.movietopchart.Model.Movie
@@ -32,7 +33,7 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rcView.layoutManager = LinearLayoutManager(context)
+        rcView.layoutManager = GridLayoutManager(context,2)
         rcView.setHasFixedSize(true)
 
         val apiInterface = ApiInterface.create().getMovies("bcc06d4f45d203738f635121cea37f4d")

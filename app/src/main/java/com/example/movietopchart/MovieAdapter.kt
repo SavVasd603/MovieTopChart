@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.movietopchart.Model.Movie
 import com.example.movietopchart.Model.Result
 import com.example.movietopchart.ui.MovieActivity
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieAdapter(val movie: MutableList<Result>?):
@@ -20,9 +21,10 @@ class MovieAdapter(val movie: MutableList<Result>?):
 
         class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             val image: ImageView = itemView.image_movie
-            val txt_name: TextView = itemView.txt_name
+            /*val txt_name: TextView = itemView.txt_name
             val txt_createdby: TextView = itemView.txt_createdby
-            val card_view: CardView = itemView.cardView
+            val card_view: CardView = itemView.cardView*/
+            val txt_rating: TextView = itemView.tvRating
 
 
         }
@@ -34,8 +36,8 @@ class MovieAdapter(val movie: MutableList<Result>?):
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ItemsViewModel = movie?.get(position)
-        holder.txt_name.text = ItemsViewModel?.title
-        holder.txt_createdby.text = ItemsViewModel?.original_title
+        Picasso.get().load("https://image.tmdb.org/t/p/w500" + movie?.get(position)?.poster_path).into(holder.image)
+        holder.txt_rating.text = ItemsViewModel?.vote_average.toString()
     }
 
     override fun getItemCount(): Int {

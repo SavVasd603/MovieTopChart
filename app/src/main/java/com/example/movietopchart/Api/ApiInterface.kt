@@ -11,6 +11,9 @@ interface ApiInterface {
     @GET("movie/popular")
     fun getMovies(@Query ("api_key") sort : String): Call<Movie>
 
+    @GET("movie/{movie_id}")
+    fun getMovieById(@Query ("api_key") sort: String):Call<Movie>
+
     companion object{
 
         var BASE_URL = "https://api.themoviedb.org/3/"
