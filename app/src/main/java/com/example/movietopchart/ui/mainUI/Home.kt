@@ -16,6 +16,10 @@ import com.example.movietopchart.Adapters.MovieAdapter
 import com.example.movietopchart.R
 import com.example.movietopchart.ui.additionUI.MovieDetail
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,25 +41,30 @@ class Home : Fragment() {
 
         rcView.layoutManager = GridLayoutManager(context,2)
         rcView.setHasFixedSize(true)
+        getMovies()
+    }
 
-        val apiInterface = ApiInterface.create().getMovies("bcc06d4f45d203738f635121cea37f4d")
+    fun getMovies(){
 
-        apiInterface.enqueue(object : Callback<Movie>, MovieAdapter.ItemClickListener{
-            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                adapter = MovieAdapter(response?.body()?.results as MutableList<Result>?, this)
-                rcView.adapter = adapter
+        GlobalScope.launch(Dispatchers.IO) {
 
-            }
-            override fun onFailure(call: Call<Movie>, t: Throwable) {
-               Toast.makeText(context, "Something goes wrong,error ${t?.message}", Toast.LENGTH_LONG).show()
-                Log.d("testlog","Failed : ${t?.message}")
-            }
+            val apiInterface = ApiInterface.create().getMovies("bcc06d4f45d203738f635121cea37f4d")
+            apiInterface.enqueue(object : Callback<Movie>, MovieAdapter.ItemClickListener{
+                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                    adapter = MovieAdapter(response?.body()?.results as MutableList<Result>?, this)
+                    rcView.adapter = adapter
 
-            override fun onItemClick(id: Int) {
-                val intent = Intent(context, MovieDetail::class.java)
-                intent.putExtra("id", id)
-                startActivity(intent)
-            }
-        })
+                }
+                override fun onFailure(call: Call<Movie>, t: Throwable) {
+                    Toast.makeText(context, "Something goes wrong,error ${t?.message}", Toast.LENGTH_LONG).show()
+                    Log.d("testlog","Failed : ${t?.message}")
+                }
+
+                override fun onItemClick(id: Int) {
+                    val intent = Intent(context, MovieDetail::class.java)
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                }
+            }) }
     }
 }

@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/activity_movie_detail.xml" value="0.35260416666666666" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/activity_main.xml" value="0.36231884057971014" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/activity_movie_detail.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/activity_splash.xml" value="0.36231884057971014" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_first.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_movie_details.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_second.xml" value="0.36231884057971014" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_splash_screen.xml" value="0.36231884057971014" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_third.xml" value="0.36231884057971014" />
+        <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/fragment_view_pager.xml" value="0.36231884057971014" />
         <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/layout/item_movie.xml" value="0.18802083333333333" />
         <entry key="..\:/AndroidProjects/MovieTopChart/app/src/main/res/menu/bottom_nav.xml" value="0.36666666666666664" />
         <entry key="..\:/MovieTopChart/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.18" />
